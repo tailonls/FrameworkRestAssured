@@ -11,7 +11,7 @@ import io.restassured.response.ValidatableResponse;
 public class ExemplosSimples {
 
 	@Test
-	public void teste() {
+	public void assertivasIniciais() {
 		
 		Response response = request(Method.GET, "http://restapi.wcaquino.me:80/ola");
 		
