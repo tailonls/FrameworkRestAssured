@@ -6,19 +6,29 @@ import static io.restassured.RestAssured.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
-public class ValidandoComJSON {
+public class C_ValidandoComJSON {
+	
+	@BeforeClass
+	public static void setup(){
+		RestAssured.baseURI = "http://restapi.wcaquino.me";
+		RestAssured.port = 80;
+		//RestAssured.basePath = "";
+	}
 	
 	@Test
 	public void DevoValidarJsonNoBody() {
 
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users/1")
+			.get("/users/1")
 		.then()
 			.statusCode(200) 
 			.body("id", is(1))
@@ -29,7 +39,7 @@ public class ValidandoComJSON {
 	@Test
 	public void DevoValidarJsonComPath() {
 		
-		Response response = get("http://restapi.wcaquino.me:80/users/1");
+		Response response = get("/users/1");
 
 		// Path
 		Assert.assertEquals(new Integer(1), response.path("id"));
@@ -44,8 +54,9 @@ public class ValidandoComJSON {
 	public void DevoValidarJsonSegundoNivel() {
 
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users/2")
+			.get("/users/2")
 		.then()
 			.statusCode(200)
 			.body("name", containsString("Joaquina"))
@@ -57,8 +68,9 @@ public class ValidandoComJSON {
 	public void DevoValidarJsonComLista() {
 
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users/3")
+			.get("/users/3")
 		.then()
 			.statusCode(200)
 			.body("name", containsString("Ana"))
@@ -73,8 +85,9 @@ public class ValidandoComJSON {
 	public void DevoValidarMensagemErro() {
 
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users/4")
+			.get("/users/4")
 		.then()
 			.statusCode(404)
 			.body("error", is("Usuário inexistente"));
@@ -86,8 +99,9 @@ public class ValidandoComJSON {
 	public void DevoValidarListaNaRaiz() {
 
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users")
+			.get("/users")
 		.then()
 			.statusCode(200)
 			.body("$", hasSize(3))
@@ -102,8 +116,9 @@ public class ValidandoComJSON {
 	public void ValidacoesAvancadas() {
 
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users")
+			.get("/users")
 		.then()
 			.statusCode(200)
 			.body("$", hasSize(3))
@@ -127,8 +142,9 @@ public class ValidandoComJSON {
 		ArrayList<String> lista = 
 				
 		given()
+			.log().uri()
 		.when()
-			.get("http://restapi.wcaquino.me:80/users")
+			.get("/users")
 		.then()
 			.statusCode(200)
 			.extract().path("name.findAll{it.startsWith('Maria')}");

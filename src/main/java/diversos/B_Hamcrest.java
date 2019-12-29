@@ -1,14 +1,15 @@
 package diversos;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import static io.restassured.RestAssured.*;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.Test;
 
-public class Hamcrest {
+public class B_Hamcrest {
 
 	@Test
 	public void testeHamcrest() {

@@ -8,7 +8,7 @@ import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
-public class ExemplosSimples {
+public class A_ExemplosSimples {
 
 	@Test
 	public void assertivasIniciais() {
